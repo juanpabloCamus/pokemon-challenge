@@ -10,7 +10,7 @@ import { Pokemon } from './pokemon/pokemon.entity';
     BattlesModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: '../db.db',
+      database: './db.db',
       entities: [Pokemon],
       synchronize: true,
     }),

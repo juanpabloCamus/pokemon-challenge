@@ -6,7 +6,7 @@ export class PokemonController {
   constructor(private pokemonService: PokemonService) {}
 
   @Get()
-  getAllPokemons() {
-    return 'aa';
+  async getAllPokemons() {
+    return await this.pokemonService.getPokemons();
   }
 }
