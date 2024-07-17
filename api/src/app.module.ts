@@ -3,6 +3,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import { BattlesModule } from './battle/battles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pokemon } from './pokemon/pokemon.entity';
+import { Battle } from './battle/battle.entitiy';
 
 @Module({
   imports: [
@@ -11,10 +12,10 @@ import { Pokemon } from './pokemon/pokemon.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: './db.db',
-      entities: [Pokemon],
+      entities: [Pokemon, Battle],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Pokemon]),
+    TypeOrmModule.forFeature([Pokemon, Battle]),
   ],
 })
 export class AppModule {}
