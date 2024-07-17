@@ -11,7 +11,7 @@ import { Battle } from './battle/battle.entitiy';
     BattlesModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: './db.db',
+      database: './src/database/database.sqlite',
       entities: [Pokemon, Battle],
       synchronize: true,
     }),

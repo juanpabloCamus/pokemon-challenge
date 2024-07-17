@@ -7,6 +7,7 @@ export class PokemonController {
 
   @Get()
   async getAllPokemons() {
+    // Retrieve all Pokemon entities
     return await this.pokemonService.getPokemons();
   }
 }

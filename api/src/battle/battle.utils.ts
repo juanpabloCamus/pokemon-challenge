@@ -1,9 +1,9 @@
-import { Pokemon } from 'src/pokemon/pokemon.entity';
+import { PokemonDto } from 'src/pokemon/dto/pokemon.dto';
 
 // Function to calculate the winner of a battle between two Pokémon
-export function calculateWinner(pokemon1: Pokemon, pokemon2: Pokemon) {
+export function calculateWinner(pokemon1: PokemonDto, pokemon2: PokemonDto) {
   // Determine attack order based on speed and attack
-  let firstAttacker, secondAttacker;
+  let firstAttacker: PokemonDto, secondAttacker: PokemonDto;
   if (pokemon1.speed > pokemon2.speed) {
     firstAttacker = pokemon1;
     secondAttacker = pokemon2;
