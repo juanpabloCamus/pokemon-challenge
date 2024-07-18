@@ -7,7 +7,7 @@ import {
   CardActionArea,
 } from '@mui/material';
 
-export const PokemonsSelect = ({ pokemons }) => {
+export const PokemonsSelect = ({ pokemons, selectPokemon }) => {
   return (
     <Grid
       container
@@ -15,9 +15,10 @@ export const PokemonsSelect = ({ pokemons }) => {
       justifyContent="space-between"
       alignItems="center"
       sx={{ height: '100%' }}
+      mb={4}
     >
       {pokemons.map((pokemon) => (
-        <Card key={pokemon.id}>
+        <Card key={pokemon.id} onClick={() => selectPokemon(pokemon)}>
           <CardActionArea>
             <CardMedia
               component="img"

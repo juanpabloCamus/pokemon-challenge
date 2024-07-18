@@ -1,23 +1,57 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { PokemonsSelect } from './components/PokemonsSelect.jsx';
+import { PokemonsSelect } from './components/PokemonSelect.jsx';
 import { Arena } from './components/Arena.jsx';
 import { Loader } from './components/Loader.jsx';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
+  const [selectedPokemon1, setSelectedPokemon1] = useState(null);
+  const [selectedPokemon2, setSelectedPokemon2] = useState(null);
+  const [winner, setWinner] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3007/pokemon')
       .then((response) => response.json())
       .then((data) => {
         setPokemons(data);
+        setSelectedPokemon1(data[0]);
       });
   }, []);
 
   if (pokemons.length === 0) {
     return <Loader />;
   }
+
+  const handleStartBattle = () => {
+    const randomIndex = Math.floor(Math.random() * pokemons.length);
+    let selectRandomPokemon;
+    if (selectedPokemon1.id === pokemons[randomIndex].id) {
+      return handleStartBattle();
+    }
+
+    selectRandomPokemon = pokemons[randomIndex];
+    setSelectedPokemon2(selectRandomPokemon);
+
+    fetch('http://localhost:3007/battle', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([selectedPokemon1, selectRandomPokemon]),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setWinner(data);
+      });
+  };
+
+  const handleSelectPokemon = (pokemon) => {
+    if (pokemon.id === selectedPokemon2?.id) {
+      setSelectedPokemon2(null);
+    }
+    setSelectedPokemon1(pokemon);
+  };
 
   return (
     <div id="app-container">
@@ -27,23 +61,28 @@ function App() {
       <Typography variant="h5" marginTop={2} marginBottom={2} align="left">
         Select your pokemon
       </Typography>
-      <PokemonsSelect pokemons={pokemons} />
-      <Box
-        mt={4}
-        mb={4}
-        textAlign="center"
-        sx={{
-          backgroundColor: '#e4f9fe',
-          border: '1px solid black',
-          borderRadius: '5px',
-          padding: '15px 30px',
-        }}
-      >
-        <Typography variant="h5" align="left">
-          Pikachu wins!
-        </Typography>
-      </Box>
-      <Arena pokemon1={pokemons[0]} pokemon2={pokemons[1]} />
+      <PokemonsSelect pokemons={pokemons} selectPokemon={handleSelectPokemon} />
+      {winner && (
+        <Box
+          mb={4}
+          textAlign="center"
+          sx={{
+            backgroundColor: '#e4f9fe',
+            border: '1px solid black',
+            borderRadius: '5px',
+            padding: '15px 30px',
+          }}
+        >
+          <Typography variant="h5" align="left">
+            {winner.name} wins!
+          </Typography>
+        </Box>
+      )}
+      <Arena
+        pokemon1={selectedPokemon1}
+        pokemon2={selectedPokemon2}
+        handleStartBattle={handleStartBattle}
+      />
     </div>
   );
 }

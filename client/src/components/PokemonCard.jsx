@@ -10,7 +10,7 @@ import {
 import { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 
-const normalise = (value) => ((value - 0) * 100) / (10 - 0);
+const normalise = (value) => ((value - 0) * 100) / (7 - 0);
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
