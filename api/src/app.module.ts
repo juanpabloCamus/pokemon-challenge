@@ -14,6 +14,8 @@ import { Battle } from './battle/battle.entitiy';
       database: './src/database/database.sqlite',
       entities: [Pokemon, Battle],
       synchronize: true,
+      migrations: ['dist/api/src/database/migrations/*.js'],
+      migrationsRun: true,
     }),
     TypeOrmModule.forFeature([Pokemon, Battle]),
   ],
