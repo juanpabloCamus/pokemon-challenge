@@ -15,7 +15,13 @@ export class BattleService {
    * @returns {Promise<Battle[]>} A promise that resolves to an array of Battle entities.
    */
   async getBattles(): Promise<Battle[]> {
-    return await this.battleRepository.find();
+    return await this.battleRepository.find({
+      relations: ['pokemon1', 'pokemon2', 'winner'],
+      take: 10,
+      order: {
+        id: 'DESC',
+      },
+    });
   }
 
   /**

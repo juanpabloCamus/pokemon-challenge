@@ -16,7 +16,6 @@ export class BattleController {
   @Post()
   async postBattle(@Body() body: PokemonDto[]) {
     const [pokemon1, pokemon2] = body;
-
     // Calculate the winner
     const winner = calculateWinner(pokemon1, pokemon2);
 

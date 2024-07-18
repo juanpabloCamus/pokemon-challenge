@@ -1,5 +1,3 @@
-// src/battle/battle.entity.ts
-
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Pokemon } from '../pokemon/pokemon.entity';
 
