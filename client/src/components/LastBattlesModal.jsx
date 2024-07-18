@@ -11,6 +11,7 @@ import {
   TableRow,
   TableBody,
 } from '@mui/material';
+import { PORT } from '../config';
 
 export default function LastBattlesModal() {
   const [open, setOpen] = React.useState(false);
@@ -19,7 +20,7 @@ export default function LastBattlesModal() {
   const [battles, setBattles] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:3007/battle')
+    fetch(`http://localhost:${PORT}/battle`)
       .then((response) => response.json())
       .then((data) => {
         setBattles(data);

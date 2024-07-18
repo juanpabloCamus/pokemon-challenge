@@ -4,6 +4,7 @@ import { PokemonsSelect } from './components/PokemonSelect.jsx';
 import { Arena } from './components/Arena.jsx';
 import { Loader } from './components/Loader.jsx';
 import LastBattlesModal from './components/LastBattlesModal.jsx';
+import { PORT } from './config.js';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -12,7 +13,7 @@ function App() {
   const [winner, setWinner] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3007/pokemon')
+    fetch(`http://localhost:${PORT}/pokemon`)
       .then((response) => response.json())
       .then((data) => {
         setPokemons(data);
@@ -29,14 +30,17 @@ function App() {
     const randomIndex = Math.floor(Math.random() * pokemons.length);
     let selectRandomPokemon;
 
-    if (selectedPokemon1.id === pokemons[randomIndex].id) {
+    if (
+      selectedPokemon1.id === pokemons[randomIndex].id ||
+      selectedPokemon2?.id === pokemons[randomIndex].id
+    ) {
       return handleStartBattle();
     }
 
     selectRandomPokemon = pokemons[randomIndex];
     setSelectedPokemon2(selectRandomPokemon);
 
-    fetch('http://localhost:3007/battle', {
+    fetch(`http://localhost:${PORT}/battle`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ export const PokemonsSelect = ({ pokemons, selectPokemon }) => {
     <Grid
       container
       gap={1}
-      justifyContent="space-between"
+      justifyContent={{ xs: 'center', sm: 'space-between' }}
       alignItems="center"
       sx={{ height: '100%' }}
       mb={4}

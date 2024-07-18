@@ -6,11 +6,12 @@ export const Arena = ({ pokemon1, pokemon2, handleStartBattle }) => {
     <Grid
       container
       gap={2}
-      justifyContent="space-between"
+      justifyContent={{ xs: 'center', sm: 'space-between' }}
       alignItems="center"
       sx={{ height: '100%' }}
+      direction={{ xs: 'column', sm: 'row' }}
     >
-      <Grid item xs>
+      <Grid item sm>
         <PokemonCard pokemon={pokemon1} />
       </Grid>
       <Grid item>
@@ -23,7 +24,7 @@ export const Arena = ({ pokemon1, pokemon2, handleStartBattle }) => {
           Start Battle
         </Button>
       </Grid>
-      <Grid item xs>
+      <Grid item sm>
         {pokemon2 === null ? (
           <Card
             sx={{
